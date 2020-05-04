@@ -5,7 +5,7 @@ import {Col, Row, Button} from "react-bootstrap";
 class PollResult extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {resultsHidden: true};
+        this.state = {showResults: false};
     }
 
 
@@ -20,17 +20,16 @@ class PollResult extends React.Component {
                 <Row>
                     <Button onClick={() => {
                         return this.setState((state, props) => {
-                            return {resultsHidden: !state.resultsHidden}
+                            return {showResults: !state.showResults}
                         })
                     }}>
-                        {this.state.resultsHidden ? "Show Results" : "Hide Results"}
+                        {this.state.showResults ? "Hide Results" : "Show Results"}
                     </Button>
                 </Row>
                 <Row>
                     {/*<Col className="d-flex justify-content-center">*/}
                     <Col>
-                        {this.state.resultsHidden ? <div>RESULTS HIDDEN</div> :
-                            <PollChart data={this.props.poll.options} className="poll-chart"/>}
+                        <PollChart data={this.props.poll.options} showResults={this.state.showResults} className="poll-chart"/>
                     </Col>
                 </Row>
             </div>
