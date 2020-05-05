@@ -29,7 +29,8 @@ class PollResult extends React.Component {
                 <Row>
                     {/*<Col className="d-flex justify-content-center">*/}
                     <Col>
-                        <PollChart data={this.props.poll.options} highlightWinner showResults={this.state.showResults} className="poll-chart"/>
+                        <PollChart data={this.props.poll.options} highlightWinner showResults={this.state.showResults}
+                                   className="poll-chart"/>
                     </Col>
                 </Row>
             </div>

@@ -16,7 +16,7 @@ function App() {
             {
                 id: "1",
                 optionText: "Brown Bear",
-                voteCount: 12,
+                voteCount: 34,
             },
             {
                 id: "2",
@@ -26,7 +26,7 @@ function App() {
             {
                 id: "3",
                 optionText: "Polar Bear",
-                voteCount: 42,
+                voteCount: 32,
             }
         ]
     }
