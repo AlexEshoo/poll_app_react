@@ -18,17 +18,17 @@ function App() {
             {
                 id: "1",
                 optionText: "Brown Bear",
-                voteCount: 34,
+                voteCount: 15,
             },
             {
                 id: "2",
                 optionText: "Black Bear",
-                voteCount: 21,
+                voteCount: 23,
             },
             {
                 id: "3",
                 optionText: "Polar Bear",
-                voteCount: 32,
+                voteCount: 10,
             }
         ]
     }

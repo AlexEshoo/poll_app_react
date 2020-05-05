@@ -36,7 +36,7 @@ class PollResult extends React.Component {
                 </Row>
                 <Row>
                     {/*Poll created on {createdAt.toString()}*/}
-                    <PollInfo votingCloseAt={this.props.poll.votingClose}
+                    <PollInfo votingClosedAt={this.props.poll.votingClose}
                               createdAt={this.props.poll.createdAt}
                               resultsAvailableAt={this.props.poll.resultsAvailableAt}/>
                 </Row>
