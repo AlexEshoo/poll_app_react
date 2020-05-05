@@ -12,10 +12,10 @@ class PollResult extends React.Component {
     render() {
         return (
             <div>
-                <Row>
+                <Row className="justify-content-md-center">
                     <h1>{this.props.poll.question}</h1>
                 </Row>
-                <Row className="d-flex justify-content-end">
+                <Row className="justify-content-end">
                     <Button onClick={() => {
                         return this.setState((state, props) => {
                             return {showResults: !state.showResults}

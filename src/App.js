@@ -36,7 +36,7 @@ function App() {
                 {/*<Col lg={4}>*/}
                 {/*    SOME CONTENT*/}
                 {/*</Col>*/}
-                <Col>
+                <Col md={{span: 6, offset: 3}}>
                     <PollResult poll={poll}/>
                 </Col>
             </Row>
