@@ -1,6 +1,6 @@
 import React from 'react';
 import PollChart from "./PollChart";
-import {Col, Row, Button} from "react-bootstrap";
+import {Row, Button} from "react-bootstrap";
 
 class PollResult extends React.Component {
     constructor(props) {
