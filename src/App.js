@@ -10,7 +10,9 @@ function App() {
     const poll = {
         id: "1",
         createdAt: "2020-05-01T14:42:13Z",
-        duration: 3600,
+        votingStart: "2020-05-01T14:42:13Z",
+        votingClose: "2020-05-05T11:06:13-04:00",
+        resultsAvailableAt: "2020-05-05T16:42:13Z",
         question: "What type of bear is best?",
         options: [
             {

@@ -1,5 +1,6 @@
 import React from 'react';
 import PollChart from "./PollChart";
+import PollInfo from "./pollInfo";
 import {Row, Button} from "react-bootstrap";
 
 class PollResult extends React.Component {
@@ -28,6 +29,10 @@ class PollResult extends React.Component {
                     {/*<Col className="d-flex justify-content-center">*/}
                     <PollChart data={this.props.poll.options} highlightWinner showResults={this.state.showResults}
                                className="poll-chart"/>
+                </Row>
+                <Row>
+                    {/*Poll created on {createdAt.toString()}*/}
+                    <PollInfo votingClose={this.props.poll.votingClose}/>
                 </Row>
             </div>
         );
