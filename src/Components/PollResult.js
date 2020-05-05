@@ -2,6 +2,7 @@ import React from 'react';
 import PollChart from "./PollChart";
 import PollInfo from "./pollInfo";
 import {Row, Button} from "react-bootstrap";
+import moment from "moment";
 
 class PollResult extends React.Component {
     constructor(props) {
@@ -11,6 +12,8 @@ class PollResult extends React.Component {
 
 
     render() {
+        const isClosed = moment().isAfter(moment(this.props.poll.votingClose))
+
         return (
             <div>
                 <Row className="justify-content-md-center">
@@ -27,7 +30,7 @@ class PollResult extends React.Component {
                 </Row>
                 <Row>
                     {/*<Col className="d-flex justify-content-center">*/}
-                    <PollChart data={this.props.poll.options} highlightWinner showResults={this.state.showResults}
+                    <PollChart data={this.props.poll.options} highlightWinner={isClosed} showResults={this.state.showResults}
                                className="poll-chart"/>
                 </Row>
                 <Row>
