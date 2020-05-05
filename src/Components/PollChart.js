@@ -6,13 +6,11 @@ function PollChart(props) {
     let sorted_scores = [];
     if (props.highlightWinner) {
         for (let category of props.data){
-            sorted_scores.push([category, category.voteCount])
+            sorted_scores.push(category)
         }
-        sorted_scores.sort((a, b) => {return b[1] - a[1]})
-        winner = sorted_scores[0][0];
+        sorted_scores.sort((a, b) => b.voteCount - a.voteCount)
+        winner = sorted_scores[0];
     }
-    console.log(sorted_scores);
-    console.log(winner);
 
     const colors = ["#214391", "#621C91", "#d49b00"];
     let bar = null;
@@ -21,9 +19,7 @@ function PollChart(props) {
             {
                 props.data.map((entry, index) => {
                     const color = colors[index % 3]
-                    console.log(`${entry.optionText}, ${winner}, ${winner.optionText}, ${entry.optionText === winner.optionText}`)
                     const strokeColor = entry.optionText === winner["optionText"] ? "#00FF00" : null
-                    console.log(strokeColor)
                     return <Cell key={index} fill={color} stroke={strokeColor} strokeWidth={5}/>
                 })
             }
