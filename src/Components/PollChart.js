@@ -2,18 +2,15 @@ import React from 'react';
 import {ResponsiveContainer, BarChart, Bar, Cell, XAxis, YAxis, Tooltip} from 'recharts';
 
 function PollChart(props) {
-    let winner = null;
-    let sorted_scores = [];
+    const colors = ["#214391", "#621C91", "#d49b00"];
+
+    let winner;
     if (props.highlightWinner) {
-        for (let category of props.data) {
-            sorted_scores.push(category)
-        }
-        sorted_scores.sort((a, b) => b.voteCount - a.voteCount)
+        const sorted_scores = [].concat(props.data).sort((a, b) => b.voteCount - a.voteCount)
         winner = sorted_scores[0].optionText;
     }
 
-    const colors = ["#214391", "#621C91", "#d49b00"];
-    let bar = null;
+    let bar;
     if (props.showResults) {
         bar = <Bar dataKey="voteCount">
             {
