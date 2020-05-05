@@ -13,11 +13,9 @@ class PollResult extends React.Component {
         return (
             <div>
                 <Row>
-                    <Col>
-                        <h1>{this.props.poll.question}</h1>
-                    </Col>
+                    <h1>{this.props.poll.question}</h1>
                 </Row>
-                <Row>
+                <Row className="d-flex justify-content-end">
                     <Button onClick={() => {
                         return this.setState((state, props) => {
                             return {showResults: !state.showResults}
@@ -28,10 +26,8 @@ class PollResult extends React.Component {
                 </Row>
                 <Row>
                     {/*<Col className="d-flex justify-content-center">*/}
-                    <Col>
-                        <PollChart data={this.props.poll.options} highlightWinner showResults={this.state.showResults}
-                                   className="poll-chart"/>
-                    </Col>
+                    <PollChart data={this.props.poll.options} highlightWinner showResults={this.state.showResults}
+                               className="poll-chart"/>
                 </Row>
             </div>
         );

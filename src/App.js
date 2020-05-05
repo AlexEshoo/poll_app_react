@@ -33,7 +33,7 @@ function App() {
     return (
         <Container fluid className="App">
             <Row>
-                {/*<Col lg={1}>*/}
+                {/*<Col lg={4}>*/}
                 {/*    SOME CONTENT*/}
                 {/*</Col>*/}
                 <Col>
