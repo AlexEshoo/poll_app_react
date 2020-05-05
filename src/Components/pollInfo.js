@@ -2,11 +2,18 @@ import React from 'react';
 import moment from "moment";
 
 function PollInfo(props) {
-    const votingClose = moment(props.votingClose)
+    const votingCloseAt = moment(props.votingClose)
+    const createdAt = moment(props.createdAt)
+    const resultsAvailableAt = moment(props.resultsAvailableAt)
+    console.log("this")
 
     return (
         <div>
-            {moment().isBefore(votingClose) ? "Voting Closes" : "Voting Closed"} {votingClose.fromNow()}
+            Poll created {createdAt.fromNow()}.
+            <br/>
+            {moment().isBefore(votingCloseAt) ? "Voting Closes" : "Voting Closed"} {votingCloseAt.fromNow()}.
+            <br/>
+            {moment().isBefore(resultsAvailableAt) ? `Results available ${resultsAvailableAt.fromNow()}.` : "Results available now."}
         </div>
     )
 }
