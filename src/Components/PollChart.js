@@ -5,7 +5,7 @@ function PollChart(props) {
     let winner = null;
     let sorted_scores = [];
     if (props.highlightWinner) {
-        for (let category of props.data){
+        for (let category of props.data) {
             sorted_scores.push(category)
         }
         sorted_scores.sort((a, b) => b.voteCount - a.voteCount)
