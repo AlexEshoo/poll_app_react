@@ -1,8 +1,9 @@
 import React from 'react';
 import PollChart from "./PollChart";
 import PollInfo from "./pollInfo";
-import {Row, Button} from "react-bootstrap";
+import {Row, Col, Button} from "react-bootstrap";
 import moment from "moment";
+import VotingAccordion from "./VotingAccordion";
 
 class PollResult extends React.Component {
     constructor(props) {
@@ -19,6 +20,16 @@ class PollResult extends React.Component {
                 <Row className="justify-content-md-center">
                     <h1>{this.props.poll.question}</h1>
                 </Row>
+                {
+                    isClosed ? null : (
+                        <Row>
+                            <Col className="justify-content-md-center"
+                                 style={{paddingRight: "0px", paddingLeft: "0px"}}>
+                                <VotingAccordion poll={this.props.poll}/>
+                            </Col>
+                        </Row>
+                    )
+                }
                 <Row className="justify-content-end">
                     <Button onClick={() => {
                         return this.setState((state, props) => {

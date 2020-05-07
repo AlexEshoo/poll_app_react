@@ -11,7 +11,7 @@ function App() {
         id: "1",
         createdAt: "2020-05-01T14:42:13Z",
         votingStart: "2020-05-01T14:42:13Z",
-        votingClose: "2020-05-05T11:14:13-04:00",
+        votingClose: "2020-05-31T11:14:13-04:00",
         resultsAvailableAt: "2020-05-05T11:13:13",
         question: "What type of bear is best?",
         options: [
