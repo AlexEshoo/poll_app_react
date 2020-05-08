@@ -16,17 +16,22 @@ import {
 function App() {
     return (
         <Router>
-            <Switch>
-                <Route path="/polls/:id">
-                    <Container fluid className="App">
+            <Container fluid className="App">
+                <Switch>
+                    <Route path="/polls/:id">
                         <Row>
                             <Col md={{span: 6, offset: 3}}>
                                 <PollResult/>
                             </Col>
                         </Row>
-                    </Container>
-                </Route>
-            </Switch>
+                    </Route>
+                    <Route path="/">
+                        <Link to="/polls/1">
+                            Poll 1
+                        </Link>
+                    </Route>
+                </Switch>
+            </Container>
         </Router>
     )
 }

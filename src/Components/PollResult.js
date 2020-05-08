@@ -69,7 +69,6 @@ function PollResult(props) {
                            className="poll-chart"/>
             </Row>
             <Row>
-                {/*Poll created on {createdAt.toString()}*/}
                 <PollInfo poll={poll}/>
             </Row>
         </div>
