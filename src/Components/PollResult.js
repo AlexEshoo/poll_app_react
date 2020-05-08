@@ -35,19 +35,6 @@ const polls = {
     }
 }
 
-// class PollResult extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         let {id} = useParams()
-//         this.state = {
-//             showResults: false,
-//             poll: polls[id]
-//         };
-//     }
-//
-//
-//     render() {
-
 function PollResult(props) {
     let {id} = useParams()
     const [showResults, setShowResults] = useState(false)
