@@ -1,6 +1,8 @@
 import React from 'react';
 import {useState} from 'react'
 import Form from 'react-bootstrap/Form';
+import InputGroup from "react-bootstrap/InputGroup";
+import Button from "react-bootstrap/Button";
 
 
 function NewPollForm(props) {
@@ -26,6 +28,7 @@ function NewPollForm(props) {
                     type="text"
                     name="pollQuestion"
                     placeholder="Enter a question"
+                    autoComplete="off"
                 />
                 <h2>
                     Options
@@ -34,18 +37,39 @@ function NewPollForm(props) {
                     options.map((opt, index) => {
                             return (
                                 <Form.Group>
-                                    <Form.Label>
-                                        {`Option ${index + 1}`}
-                                    </Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        key={index}
-                                        option-index={index}
-                                        name={`option-${index}`}
-                                        value={opt}
-                                        placeholder="Enter an option"
-                                        onChange={pollOptionChangeHandler}
-                                    />
+                                    <InputGroup>
+                                        <InputGroup.Prepend>
+                                            <InputGroup.Text id={`option-${index}-label`}>
+                                                {`Option ${index + 1}`}
+                                            </InputGroup.Text>
+                                        </InputGroup.Prepend>
+                                        <Form.Control
+                                            type="text"
+                                            key={index}
+                                            option-index={index}
+                                            name={`option-${index}`}
+                                            value={opt}
+                                            placeholder="Enter an option"
+                                            onChange={pollOptionChangeHandler}
+                                            autoComplete="off"
+                                        />
+                                        <InputGroup.Append>
+                                            <Button
+                                                variant='danger'
+                                                key={index}
+                                                option-index={index}
+                                                disabled={options.length < 3}
+                                                onClick={(event) => {
+                                                    let newArr = [...options]
+                                                    console.log(event.target.getAttribute("option-index"))
+                                                    newArr.splice(event.target.getAttribute("option-index"), 1)
+                                                    setOptions(newArr)
+                                                }}
+                                            >
+                                                Delete
+                                            </Button>
+                                        </InputGroup.Append>
+                                    </InputGroup>
                                 </Form.Group>
                             )
                         }
