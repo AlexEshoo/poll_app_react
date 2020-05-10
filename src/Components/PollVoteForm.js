@@ -9,7 +9,7 @@ class PollVoteForm extends React.Component {
         this.state = {
             votes: {}
         }
-        for (let opt of props.poll.options) {
+        for (let opt of props.poll.choices) {
             this.state.votes[opt.id] = {isCast: false}
         }
 
@@ -18,12 +18,12 @@ class PollVoteForm extends React.Component {
 
 
     handleInputChange(event) {
-        const optionId = event.target.name
+        const choiceId = event.target.name
         const checkboxValue = event.target.checked
         this.setState((state, props) => {
             let newVotes = {}
             Object.assign(newVotes, state.votes)
-            newVotes[optionId] = checkboxValue
+            newVotes[choiceId] = checkboxValue
             return {votes: newVotes}
         })
     }
@@ -40,11 +40,11 @@ class PollVoteForm extends React.Component {
                 <Form.Group controlId="formVoteSelection">
                     <Form.Label>Vote Selection</Form.Label>
                     {
-                        this.props.poll.options.map((o) => {
+                        this.props.poll.choices.map((o) => {
                             return <Form.Check
                                 name={o.id}
                                 key={o.id}
-                                label={o.optionText}
+                                label={o.choiceText}
                                 checked={this.state.votes[o.id].isCast}
                                 onChange={this.handleInputChange}/>
                         })

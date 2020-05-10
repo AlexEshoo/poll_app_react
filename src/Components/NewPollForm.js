@@ -9,16 +9,16 @@ import Col from "react-bootstrap/Col";
 
 
 function NewPollForm() {
-    const [options, setOptions] = useState(["", ""])
+    const [choices, setChoices] = useState(["", ""])
 
-    function pollOptionChangeHandler(event) {
-        let newArr = [...options]
-        newArr[event.target.getAttribute("option-index")] = event.target.value
+    function pollChoiceChangeHandler(event) {
+        let newArr = [...choices]
+        newArr[event.target.getAttribute("choice-index")] = event.target.value
         if (newArr.length >= 2 && newArr.every((v) => !!v)) {
             newArr.push("")
         }
         console.log(newArr)
-        setOptions(newArr)
+        setChoices(newArr)
     }
 
     return (
@@ -38,39 +38,39 @@ function NewPollForm() {
                 />
             </Form.Group>
             <h2>
-                Options
+                Choices
             </h2>
             {
-                options.map((opt, index) => {
+                choices.map((opt, index) => {
                         return (
                             <Form.Group>
                                 <InputGroup>
                                     <InputGroup.Prepend>
-                                        <InputGroup.Text id={`option-${index}-label`}>
-                                            {`Option ${index + 1}`}
+                                        <InputGroup.Text id={`choice-${index}-label`}>
+                                            {`Choice ${index + 1}`}
                                         </InputGroup.Text>
                                     </InputGroup.Prepend>
                                     <Form.Control
                                         type="text"
                                         key={index}
-                                        option-index={index}
-                                        // name={`option-${index}`}
+                                        choice-index={index}
+                                        // name={`Choice-${index}`}
                                         value={opt}
-                                        placeholder="Enter an option"
-                                        onChange={pollOptionChangeHandler}
+                                        placeholder="Enter an choice"
+                                        onChange={pollChoiceChangeHandler}
                                         autoComplete="off"
                                     />
                                     <InputGroup.Append>
                                         <Button
                                             variant='danger'
                                             key={index}
-                                            option-index={index}
-                                            disabled={options.length < 3}
+                                            choice-index={index}
+                                            disabled={choices.length < 3}
                                             onClick={(event) => {
-                                                let newArr = [...options]
-                                                console.log(event.target.getAttribute("option-index"))
-                                                newArr.splice(event.target.getAttribute("option-index"), 1)
-                                                setOptions(newArr)
+                                                let newArr = [...choices]
+                                                console.log(event.target.getAttribute("choice-index"))
+                                                newArr.splice(event.target.getAttribute("choice-index"), 1)
+                                                setChoices(newArr)
                                             }}
                                         >
                                             Delete

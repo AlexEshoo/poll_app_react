@@ -15,20 +15,20 @@ const polls = {
         votingClose: "2020-05-31T11:14:13-04:00",
         resultsAvailableAt: "2020-05-05T11:13:13",
         question: "What type of bear is best?",
-        options: [
+        choices: [
             {
                 id: "1",
-                optionText: "Brown Bear",
+                choiceText: "Brown Bear",
                 voteCount: 15,
             },
             {
                 id: "2",
-                optionText: "Black Bear",
+                choiceText: "Black Bear",
                 voteCount: 23,
             },
             {
                 id: "3",
-                optionText: "Polar Bear",
+                choiceText: "Polar Bear",
                 voteCount: 10,
             }
         ]
@@ -64,7 +64,7 @@ function PollResult(props) {
             </Row>
             <Row>
                 {/*<Col className="d-flex justify-content-center">*/}
-                <PollChart data={poll.options} highlightWinner={isClosed}
+                <PollChart data={poll.choices} highlightWinner={isClosed}
                            showResults={showResults}
                            className="poll-chart"/>
             </Row>
