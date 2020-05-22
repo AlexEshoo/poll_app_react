@@ -11,6 +11,8 @@ function PollInfo(props) {
         <div>
             Poll created {createdAt.fromNow()}.
             <br/>
+            There are currently {props.poll.voteCount} votes.
+            <br/>
             {moment().isBefore(votingEndAt) ? "Voting Closes" : "Voting Closed"} {votingEndAt.fromNow()}.
             <br/>
             {moment().isBefore(resultsAvailableAt) ? `Results available ${resultsAvailableAt.fromNow()}.` : "Results available now."}

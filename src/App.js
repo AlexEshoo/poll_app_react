@@ -13,6 +13,8 @@ import {
     Link,
     useParams
 } from "react-router-dom";
+import PollCard from "./Components/PollCard";
+import PollsDeck from "./Components/PollsDeck";
 
 function App() {
     return (
@@ -28,9 +30,7 @@ function App() {
                                 <PollResult/>
                             </Route>
                             <Route path="/">
-                                <Link to="/polls/1">
-                                    Poll 1
-                                </Link>
+                                <PollsDeck/>
                             </Route>
                         </Switch>
                     </Col>
