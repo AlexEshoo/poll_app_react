@@ -19,9 +19,9 @@ function PollChart(props) {
     if (props.showResults) {
         bar = <Bar dataKey="voteCount">
             {
-                props.data.map((entry, index) => {
+                props.data.map((choice, index) => {
                     const color = colors[index % 3]
-                    const strokeColor = winners.includes(entry.choiceText) ? "#00FF00" : null
+                    const strokeColor = winners.includes(choice.text) ? "#00FF00" : null
                     return <Cell key={index} fill={color} stroke={strokeColor} strokeWidth={5}/>
                 })
             }
@@ -31,7 +31,7 @@ function PollChart(props) {
         <ResponsiveContainer width="100%" height={500}>
             <BarChart data={props.data} layout="vertical">
                 <Tooltip formatter={(value, name, props) => [value, "Votes"]} cursor={false} isAnimationActive={true}/>
-                <YAxis type="category" dataKey="choiceText"/>
+                <YAxis type="category" dataKey="text"/>
                 <XAxis type="number" allowDecimals={false}/>
                 {bar}
             </BarChart>

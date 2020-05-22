@@ -34,7 +34,7 @@ class PollVoteForm extends React.Component {
 
 
     render() {
-        console.log(this.state)
+        // console.log(this.state)
         return (
             <Form onSubmit={(e) => {e.preventDefault(); this.handleSubmission(e)}}>
                 <Form.Group controlId="formVoteSelection">
@@ -44,7 +44,7 @@ class PollVoteForm extends React.Component {
                             return <Form.Check
                                 name={o.id}
                                 key={o.id}
-                                label={o.choiceText}
+                                label={o.text}
                                 checked={this.state.votes[o.id].isCast}
                                 onChange={this.handleInputChange}/>
                         })

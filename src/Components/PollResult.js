@@ -6,39 +6,45 @@ import {Row, Col, Button} from "react-bootstrap";
 import moment from "moment";
 import VotingAccordion from "./VotingAccordion";
 import {useParams} from 'react-router-dom'
+import {useQuery} from '@apollo/react-hooks';
+import {gql} from 'apollo-boost';
 
-const polls = {
-    "1": {
-        id: "1",
-        createdAt: "2020-05-01T14:42:13Z",
-        votingStart: "2020-05-01T14:42:13Z",
-        votingClose: "2020-05-31T11:14:13-04:00",
-        resultsAvailableAt: "2020-05-05T11:13:13",
-        question: "What type of bear is best?",
-        choices: [
-            {
-                id: "1",
-                choiceText: "Brown Bear",
-                voteCount: 15,
-            },
-            {
-                id: "2",
-                choiceText: "Black Bear",
-                voteCount: 23,
-            },
-            {
-                id: "3",
-                choiceText: "Polar Bear",
-                voteCount: 10,
+const GET_POLL = gql`
+    query getPoll($pollId: ID!) {
+        poll(pollId: $pollId) {
+            id
+            question
+            voteCount
+            createdAt
+            votingStart
+            votingEnd
+            resultsAvailableAt
+            choices {
+                id
+                text
+                voteCount
             }
-        ]
+        }
     }
-}
+`
 
 function PollResult(props) {
     let {id} = useParams()
     const [showResults, setShowResults] = useState(false)
-    const [poll, setPoll] = useState(polls[id])
+    const {loading, error, data} = useQuery(GET_POLL, {
+        pollInterval: 2000,
+        variables: {
+            pollId: id
+        }
+    })
+
+    if (loading) return "LOADING"
+    if (error) {
+        console.log(error)
+        return error.message
+    }
+
+    const poll = data.poll
 
     const isClosed = moment().isAfter(moment(poll.votingClose))
 
