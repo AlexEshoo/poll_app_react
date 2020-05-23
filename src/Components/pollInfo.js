@@ -5,7 +5,6 @@ function PollInfo(props) {
     const votingEndAt = moment(props.poll.votingEnd)
     const createdAt = moment(props.poll.createdAt)
     const resultsAvailableAt = moment(props.poll.resultsAvailableAt)
-    console.log("this")
 
     return (
         <div>

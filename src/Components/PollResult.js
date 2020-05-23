@@ -32,7 +32,7 @@ function PollResult(props) {
     let {id} = useParams()
     const [showResults, setShowResults] = useState(false)
     const {loading, error, data} = useQuery(GET_POLL, {
-        pollInterval: 2000,
+        pollInterval: 500,
         variables: {
             pollId: id
         }
