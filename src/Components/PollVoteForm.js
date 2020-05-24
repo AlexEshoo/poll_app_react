@@ -16,11 +16,11 @@ const CAST_VOTE = gql`
 
 
 function PollVoteForm(props) {
-    const [votes, setVotes] = useState(new Map(props.poll.choices.map((choice) => {
+    const [choiceSelections, setChoiceSelections] = useState(new Map(props.poll.choices.map((choice) => {
             return [choice.id, false]
         }
     )))
-    const selectedIds = [...votes.keys()].filter((id) => votes.get(id))
+    const selectedIds = [...choiceSelections.keys()].filter((id) => choiceSelections.get(id))
     const [castVote, {data}] = useMutation(CAST_VOTE);
 
     return (
@@ -35,24 +35,24 @@ function PollVoteForm(props) {
                 })
             console.log(data)
         }}>
-            <Form.Group controlId="formVoteSelection">
-                <Form.Label>Vote Selection</Form.Label>
-                {
-                    props.poll.choices.map((choice) => {
-                        return <Form.Check
-                            name={choice.id}
+            <Form.Label>Vote Selection</Form.Label>
+            {
+                props.poll.choices.map((choice) => {
+                    return (
+                        <Form.Check
+                            id={choice.id}
                             key={choice.id}
                             label={choice.text}
-                            checked={votes[choice.id]}
+                            checked={choiceSelections[choice.id]}
                             onChange={(event) => {
-                                const newVotes = new Map(votes)
-                                newVotes.set(event.target.name, event.target.checked)
-                                setVotes(newVotes)
+                                const newVotes = new Map(choiceSelections)
+                                newVotes.set(event.target.id, event.target.checked)
+                                setChoiceSelections(newVotes)
                             }}
                         />
-                    })
-                }
-            </Form.Group>
+                    )
+                })
+            }
             <Button variant="warning" type="submit">
                 Submit
             </Button>
