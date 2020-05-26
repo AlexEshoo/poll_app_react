@@ -9,11 +9,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    Link,
-    useParams
+    Route
 } from "react-router-dom";
-import PollCard from "./Components/PollCard";
 import PollsDeck from "./Components/PollsDeck";
 
 function App() {

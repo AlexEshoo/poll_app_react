@@ -1,5 +1,4 @@
 import React from 'react'
-import CardDeck from "react-bootstrap/CardDeck";
 import {gql} from 'apollo-boost';
 import {useQuery} from "@apollo/react-hooks";
 import PollCard from "./PollCard";
