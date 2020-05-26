@@ -32,20 +32,20 @@ function PollVoteForm(props) {
     if (voteResult.called) {
         if (voteResult.loading) {
             voteResultInfo = (
-                <div className="d-flex align-items-center" style={{display: "inline", "padding-left": "10px"}}>
+                <div className="d-flex align-items-center" style={{"padding-left": "10px"}}>
                     <Spinner animation="border" variant="primary"/>
                 </div>
             )
         } else {
             if (voteResult.data.castVote.ok) {
                 voteResultInfo = (
-                    <div className="d-flex align-items-center" style={{color: "green", display: "inline", "padding-left": "10px"}}>
+                    <div className="d-flex align-items-center" style={{color: "green", "padding-left": "10px"}}>
                         Vote Successful!
                     </div>
                 )
             } else {
                 voteResultInfo = (
-                    <div className="d-flex align-items-center" style={{color: "red", display: "inline", "padding-left": "10px"}}>
+                    <div className="d-flex align-items-center" style={{color: "red", "padding-left": "10px"}}>
                         Vote Failed: {voteResult.data.castVote.failReason}
                     </div>
                 )
