@@ -11,7 +11,7 @@ import {InMemoryCache} from "apollo-cache-inmemory";
 const client = new ApolloClient({
     cache: new InMemoryCache(),
     link: new HttpLink({
-        credentials: 'include',
+        credentials: 'include',  // allows ALL cross-origin cookies, including but not limited to credentials
         uri: "http://localhost:5000/graphql"
     })
 })
