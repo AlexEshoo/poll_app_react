@@ -84,10 +84,10 @@ function PollVoteForm(props) {
                 })
             }
             <div className="d-flex align-content-center">
-            <Button variant="warning" type="submit">
-                Submit
-            </Button>
-            {voteResultInfo}
+                <Button variant="warning" type="submit">
+                    Submit
+                </Button>
+                {voteResultInfo}
             </div>
         </Form>
     )
