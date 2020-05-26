@@ -21,7 +21,30 @@ function PollVoteForm(props) {
         }
     )))
     const selectedIds = [...choiceSelections.keys()].filter((id) => choiceSelections.get(id))
-    const [castVote, {data}] = useMutation(CAST_VOTE);
+    const [castVote, voteResult] = useMutation(CAST_VOTE);
+
+    console.log(voteResult)
+
+    let voteResultInfo
+    if (voteResult.called) {
+        if (voteResult.loading) {
+            //TODO
+        } else {
+            if (voteResult.data.castVote.ok) {
+                voteResultInfo = (
+                    <div style={{color: "green"}}>
+                        Vote Successful!
+                    </div>
+                )
+            } else {
+                voteResultInfo = (
+                    <div style={{color: "red"}}>
+                        Vote Failed: {voteResult.data.castVote.failReason}
+                    </div>
+                )
+            }
+        }
+    }
 
     return (
         <Form onSubmit={(e) => {
@@ -33,7 +56,7 @@ function PollVoteForm(props) {
                         choiceIds: selectedIds
                     }
                 })
-            console.log(data)
+            console.log("voteResult", voteResult)
         }}>
             <Form.Label>Vote Selection</Form.Label>
             {
@@ -56,6 +79,7 @@ function PollVoteForm(props) {
             <Button variant="warning" type="submit">
                 Submit
             </Button>
+            {voteResultInfo}
         </Form>
     )
 }

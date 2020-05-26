@@ -1,12 +1,30 @@
+:root {
+    --color1: #223843ff;
+    --color2: #eff1f3ff;
+    --color3: #dbd3d8ff;
+    --color4: #d8b4a0ff;
+    --color5: #d77a61ff;
+
+}
+
 .App {
-  min-height: 100vh;
-  background-color: #282c34;
-  color: white;
+    min-height: 100vh;
+    background-color: var(--color1);
+    color: var(--color2);
 }
 
 .poll-chart {
+    color: black
+}
+
+.poll-chart-bar-0 {
+    fill: var(--color4)
+}
+
+.poll-chart-bar-1 {
+    fill: var(--color5)
 }
 
 .poll-card {
-  color: black
+    color: black
 }

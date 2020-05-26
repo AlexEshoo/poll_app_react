@@ -68,11 +68,13 @@ function PollResult(props) {
                     {showResults ? "Hide Results" : "Show Results"}
                 </Button>
             </Row>
-            <Row>
+            <Row className="poll-chart">
                 {/*<Col className="d-flex justify-content-center">*/}
-                <PollChart data={poll.choices} highlightWinner={isClosed}
-                           showResults={showResults}
-                           className="poll-chart"/>
+                <PollChart
+                    data={poll.choices}
+                    highlightWinner={isClosed}
+                    showResults={showResults}
+                />
             </Row>
             <Row>
                 <PollInfo poll={poll}/>
