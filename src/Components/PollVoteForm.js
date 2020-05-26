@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form"
 import {Button} from "react-bootstrap";
 import gql from 'graphql-tag';
 import {useMutation} from '@apollo/react-hooks';
+import Spinner from "react-bootstrap/Spinner";
 
 const CAST_VOTE = gql`
     mutation castMyVote($pollId: ID! $choiceIds: [ID!]!) {
@@ -25,20 +26,26 @@ function PollVoteForm(props) {
 
     console.log(voteResult)
 
+
     let voteResultInfo
+
     if (voteResult.called) {
         if (voteResult.loading) {
-            //TODO
+            voteResultInfo = (
+                <div className="d-flex align-items-center" style={{display: "inline", "padding-left": "10px"}}>
+                    <Spinner animation="border" variant="primary"/>
+                </div>
+            )
         } else {
             if (voteResult.data.castVote.ok) {
                 voteResultInfo = (
-                    <div style={{color: "green"}}>
+                    <div className="d-flex align-items-center" style={{color: "green", display: "inline", "padding-left": "10px"}}>
                         Vote Successful!
                     </div>
                 )
             } else {
                 voteResultInfo = (
-                    <div style={{color: "red"}}>
+                    <div className="d-flex align-items-center" style={{color: "red", display: "inline", "padding-left": "10px"}}>
                         Vote Failed: {voteResult.data.castVote.failReason}
                     </div>
                 )
@@ -76,10 +83,12 @@ function PollVoteForm(props) {
                     )
                 })
             }
+            <div className="d-flex align-content-center">
             <Button variant="warning" type="submit">
                 Submit
             </Button>
             {voteResultInfo}
+            </div>
         </Form>
     )
 }
