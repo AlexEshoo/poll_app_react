@@ -8,6 +8,7 @@ import VotingAccordion from "./VotingAccordion";
 import {useParams} from 'react-router-dom'
 import {useQuery} from '@apollo/react-hooks';
 import {gql} from 'apollo-boost';
+import LoadingIcon from "./LoadingIcon";
 
 const GET_POLL = gql`
     query getPoll($pollId: ID!) {
@@ -38,7 +39,7 @@ function PollResult(props) {
         }
     })
 
-    if (loading) return "LOADING"
+    if (loading) return <LoadingIcon/>
     if (error) {
         console.log(error)
         return error.message

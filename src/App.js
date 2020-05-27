@@ -12,6 +12,7 @@ import {
     Route
 } from "react-router-dom";
 import PollsDeck from "./Components/PollsDeck";
+import LoadingIcon from "./Components/LoadingIcon";
 
 function App() {
     return (
@@ -25,6 +26,9 @@ function App() {
                             </Route>
                             <Route path="/polls/:id">
                                 <PollResult/>
+                            </Route>
+                            <Route path="/loading">
+                                <LoadingIcon/>
                             </Route>
                             <Route path="/">
                                 <PollsDeck/>
