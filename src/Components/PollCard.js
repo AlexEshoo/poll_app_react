@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from "react-bootstrap/Card";
-import PollInfo from "./pollInfo";
+import PollInfo from "./PollInfo";
 import {Link} from 'react-router-dom'
 
 function PollCard(props) {

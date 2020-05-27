@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState} from 'react'
 import PollChart from "./PollChart";
-import PollInfo from "./pollInfo";
+import PollInfo from "./PollInfo";
 import {Row, Col, Button} from "react-bootstrap";
 import moment from "moment";
 import VotingAccordion from "./VotingAccordion";
