@@ -6,23 +6,55 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Col from "react-bootstrap/Col";
+import gql from 'graphql-tag';
+import {useMutation} from '@apollo/react-hooks';
+
+
+const CREATE_POLL = gql`
+    mutation createNewPoll($pollInput: PollInput!) {
+        createPoll(pollData: $pollInput) {
+            id
+        }
+    }
+`
+
+function handleFormSubmit(event) {
+
+}
 
 
 function NewPollForm() {
-    const [choices, setChoices] = useState(["", ""])
+    const [question, setQuestion] = useState("")
+    const [choices, setChoices] = useState([{"text": ""}, {"text": ""}])
+    const [createPoll, createPollResult] = useMutation(CREATE_POLL)
+
+    console.log(choices)
 
     function pollChoiceChangeHandler(event) {
         let newArr = [...choices]
-        newArr[event.target.getAttribute("choice-index")] = event.target.value
-        if (newArr.length >= 2 && newArr.every((v) => !!v)) {
-            newArr.push("")
+        newArr[event.target.getAttribute("choice-index")].text = event.target.value
+        if (newArr.length >= 2 && newArr.every((v) => !!v.text)) {
+            newArr.push({text: ""})
         }
         console.log(newArr)
         setChoices(newArr)
     }
 
     return (
-        <Form>
+        <Form onSubmit={(e) => {
+            e.preventDefault()
+            createPoll(
+                {
+                    variables: {
+                        pollInput: {
+                            question: question,
+                            duplicateVoteProtectionMode: "NONE",
+                            choices: choices.filter(c => !!c.text)
+                        }
+                    }
+                }
+            )
+        }}>
             <h1>
                 New Poll
             </h1>
@@ -32,16 +64,20 @@ function NewPollForm() {
                 </Form.Label>
                 <Form.Control
                     type="text"
+                    value={question}
                     // name="pollQuestion"
                     placeholder="Enter a question"
                     autoComplete="off"
+                    onChange={(e) => {
+                        setQuestion(e.target.value)
+                    }}
                 />
             </Form.Group>
             <h2>
                 Choices
             </h2>
             {
-                choices.map((opt, index) => {
+                choices.map((choice, index) => {
                         return (
                             <Form.Group>
                                 <InputGroup>
@@ -55,7 +91,7 @@ function NewPollForm() {
                                         key={index}
                                         choice-index={index}
                                         // name={`Choice-${index}`}
-                                        value={opt}
+                                        value={choice.text}
                                         placeholder="Enter an choice"
                                         onChange={pollChoiceChangeHandler}
                                         autoComplete="off"
