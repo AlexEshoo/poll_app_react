@@ -8,7 +8,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Col from "react-bootstrap/Col";
 import gql from 'graphql-tag';
 import {useMutation} from '@apollo/react-hooks';
-
+import {Redirect} from 'react-router-dom'
 
 const CREATE_POLL = gql`
     mutation createNewPoll($pollInput: PollInput!) {
@@ -28,8 +28,6 @@ function NewPollForm() {
     const [choices, setChoices] = useState([{"text": ""}, {"text": ""}])
     const [createPoll, createPollResult] = useMutation(CREATE_POLL)
 
-    console.log(choices)
-
     function pollChoiceChangeHandler(event) {
         let newArr = [...choices]
         newArr[event.target.getAttribute("choice-index")].text = event.target.value
@@ -38,6 +36,16 @@ function NewPollForm() {
         }
         console.log(newArr)
         setChoices(newArr)
+    }
+
+    if (createPollResult.data) {
+        return (
+            <Redirect
+                to={{
+                    pathname: `/polls/${createPollResult.data.createPoll.id}`
+                }}
+            />
+        )
     }
 
     return (
@@ -121,7 +129,10 @@ function NewPollForm() {
             <Row className="justify-content-center">
                 <Col>
                     <ButtonGroup className="d-flex">
-                        <Button type="submit">
+                        <Button
+                            type="submit"
+                            disabled={createPollResult.loading}
+                        >
                             Create Poll
                         </Button>
                     </ButtonGroup>
