@@ -18,10 +18,6 @@ const CREATE_POLL = gql`
     }
 `
 
-function handleFormSubmit(event) {
-
-}
-
 
 function NewPollForm() {
     const [question, setQuestion] = useState("")
@@ -45,6 +41,22 @@ function NewPollForm() {
         setChoices(newArr)
     }
 
+    function handleFormSubmit(event) {
+        event.preventDefault()
+        createPoll(
+            {
+                variables: {
+                    pollInput: {
+                        question: question,
+                        duplicateVoteProtectionMode: protectionMode,
+                        selectionLimit: selectionLimit,
+                        choices: choices.filter(c => !!c.text)
+                    }
+                }
+            }
+        )
+    }
+
     if (createPollResult.data) {
         return (
             <Redirect
@@ -56,21 +68,7 @@ function NewPollForm() {
     }
 
     return (
-        <Form onSubmit={(e) => {
-            e.preventDefault()
-            createPoll(
-                {
-                    variables: {
-                        pollInput: {
-                            question: question,
-                            duplicateVoteProtectionMode: protectionMode,
-                            selectionLimit: selectionLimit,
-                            choices: choices.filter(c => !!c.text)
-                        }
-                    }
-                }
-            )
-        }}>
+        <Form onSubmit={handleFormSubmit}>
             <h1>
                 New Poll
             </h1>
