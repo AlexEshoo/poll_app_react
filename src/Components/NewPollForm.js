@@ -26,7 +26,14 @@ function handleFormSubmit(event) {
 function NewPollForm() {
     const [question, setQuestion] = useState("")
     const [choices, setChoices] = useState([{"text": ""}, {"text": ""}])
+    const [protectionMode, setProtectionMode] = useState("IP_ADDRESS")
+    const [multiSelectEnabled, setMultiSelectEnabled] = useState(false)
+    const [selectionLimit, setSelectionLimit] = useState(1)
     const [createPoll, createPollResult] = useMutation(CREATE_POLL)
+
+    if (selectionLimit > choices.length) {
+        setSelectionLimit(choices.length)
+    }
 
     function pollChoiceChangeHandler(event) {
         let newArr = [...choices]
@@ -56,7 +63,8 @@ function NewPollForm() {
                     variables: {
                         pollInput: {
                             question: question,
-                            duplicateVoteProtectionMode: "NONE",
+                            duplicateVoteProtectionMode: protectionMode,
+                            selectionLimit: selectionLimit,
                             choices: choices.filter(c => !!c.text)
                         }
                     }
@@ -109,7 +117,7 @@ function NewPollForm() {
                                             variant='danger'
                                             key={index}
                                             choice-index={index}
-                                            disabled={choices.length < 3}
+                                            disabled={choices.length < 3 || index === choices.length - 1}
                                             onClick={(event) => {
                                                 let newArr = [...choices]
                                                 console.log(event.target.getAttribute("choice-index"))
@@ -126,6 +134,41 @@ function NewPollForm() {
                     }
                 )
             }
+            <Form.Group controlId="exampleForm.SelectCustom">
+                <Form.Label>Duplicate Vote Protection Mode</Form.Label>
+                <Form.Control
+                    as="select"
+                    value={protectionMode}
+                    onChange={(e) => setProtectionMode(e.target.value)}
+                >
+                    <option>NONE</option>
+                    <option>COOKIE</option>
+                    <option>IP_ADDRESS</option>
+                    <option>LOGIN</option>
+                </Form.Control>
+            </Form.Group>
+            <Form.Group>
+                <Form.Check
+                    label="Allow users to make multiple selections"
+                    checked={multiSelectEnabled}
+                    onChange={(e) => {
+                        setSelectionLimit(1)
+                        setMultiSelectEnabled(e.target.checked)
+                    }}
+                />
+                <Form.Label>
+                    Maximum Number of Selections: {selectionLimit}
+                </Form.Label>
+                <Form.Control
+                    type="range"
+                    disabled={!multiSelectEnabled}
+                    max={choices.length}
+                    min={1}
+                    step={1}
+                    value={selectionLimit}
+                    onChange={(e) => setSelectionLimit(e.target.value)}
+                />
+            </Form.Group>
             <Row className="justify-content-center">
                 <Col>
                     <ButtonGroup className="d-flex">
