@@ -4,6 +4,7 @@ import Card from "react-bootstrap/Card";
 import Button from 'react-bootstrap/Button'
 import PollVoteForm from "./PollVoteForm";
 import {useAccordionToggle} from "react-bootstrap";
+import {getVotedPolls} from '../utils'
 
 function CustomToggle({children, eventKey}) {
     const decoratedOnClick = useAccordionToggle(eventKey, () =>
@@ -22,7 +23,7 @@ function CustomToggle({children, eventKey}) {
 
 function VotingAccordion(props) {
     return (
-        <Accordion defaultActiveKey="0">
+        <Accordion defaultActiveKey={getVotedPolls().includes(props.poll.id) ? null : "0"}>
             <Card>
                 <Card.Header>
                 <CustomToggle eventKey="0">

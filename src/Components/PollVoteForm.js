@@ -5,6 +5,7 @@ import {Button} from "react-bootstrap";
 import gql from 'graphql-tag';
 import {useMutation} from '@apollo/react-hooks';
 import Spinner from "react-bootstrap/Spinner";
+import {addVotedPoll} from "../utils";
 
 const CAST_VOTE = gql`
     mutation castMyVote($pollId: ID! $choiceIds: [ID!]!) {
@@ -24,9 +25,6 @@ function PollVoteForm(props) {
     const selectedIds = [...choiceSelections.keys()].filter((id) => choiceSelections.get(id))
     const [castVote, voteResult] = useMutation(CAST_VOTE);
 
-    console.log(voteResult)
-
-
     let voteResultInfo
 
     if (voteResult.called) {
@@ -43,6 +41,8 @@ function PollVoteForm(props) {
                         Vote Successful!
                     </div>
                 )
+                addVotedPoll(props.poll.id)  // Keep track internally
+
             } else {
                 voteResultInfo = (
                     <div className="d-flex align-items-center" style={{color: "red", "padding-left": "10px"}}>
@@ -63,7 +63,6 @@ function PollVoteForm(props) {
                         choiceIds: selectedIds
                     }
                 })
-            console.log("voteResult", voteResult)
         }}>
             <Form.Label>Vote Selection</Form.Label>
             {
