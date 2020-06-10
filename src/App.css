@@ -12,6 +12,9 @@
     background-color: var(--color1);
     color: var(--color2);
 }
+.poll-nav {
+    color: var(--color2)
+}
 
 .poll-chart {
     color: black
