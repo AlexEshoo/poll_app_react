@@ -13,7 +13,7 @@
     color: var(--color2);
 }
 .poll-nav {
-    color: var(--color2)
+    background-color: var(--color2);
 }
 
 .poll-chart {
