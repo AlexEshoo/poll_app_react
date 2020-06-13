@@ -21,7 +21,6 @@ const GET_POLLS = gql`
 function PollsDeck() {
 
     const {loading, error, data} = useQuery(GET_POLLS)
-    console.log(data)
 
     if (loading) return "LOADING"
     if (error) return error.message
