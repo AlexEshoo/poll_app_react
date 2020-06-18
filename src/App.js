@@ -14,32 +14,35 @@ import {
 import PollsDeck from "./Components/PollsDeck";
 import LoadingIcon from "./Components/LoadingIcon";
 import AppNavbar from "./Components/AppNavbar";
+import {UserContextProvider} from "./Components/UserContext";
 
 function App() {
     return (
-        <Router>
-            <AppNavbar/>
-            <Container fluid className="App">
-                <Row>
-                    <Col lg={{span: 6, offset: 3}} md={{span: 8, offset: 2}} sm={{span: 10, offset: 1}}>
-                        <Switch>
-                            <Route path="/polls/new">
-                                <NewPollForm/>
-                            </Route>
-                            <Route path="/polls/:id">
-                                <PollResult/>
-                            </Route>
-                            <Route path="/loading">
-                                <LoadingIcon/>
-                            </Route>
-                            <Route path="/">
-                                <PollsDeck/>
-                            </Route>
-                        </Switch>
-                    </Col>
-                </Row>
-            </Container>
-        </Router>
+        <UserContextProvider>
+            <Router>
+                <AppNavbar/>
+                <Container fluid className="App">
+                    <Row>
+                        <Col lg={{span: 6, offset: 3}} md={{span: 8, offset: 2}} sm={{span: 10, offset: 1}}>
+                            <Switch>
+                                <Route path="/polls/new">
+                                    <NewPollForm/>
+                                </Route>
+                                <Route path="/polls/:id">
+                                    <PollResult/>
+                                </Route>
+                                <Route path="/loading">
+                                    <LoadingIcon/>
+                                </Route>
+                                <Route path="/">
+                                    <PollsDeck/>
+                                </Route>
+                            </Switch>
+                        </Col>
+                    </Row>
+                </Container>
+            </Router>
+        </UserContextProvider>
     )
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {Formik, Form, Field, ErrorMessage, useFormikContext} from "formik";
 import * as Yup from 'yup'
 import FormControl from 'react-bootstrap/FormControl'
@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import gql from 'graphql-tag';
 import {useMutation} from '@apollo/react-hooks';
 import Spinner from "react-bootstrap/Spinner";
+import {UserContext} from "./UserContext";
 
 const LOGIN = gql`
     mutation loginUser($username: String! $password: String! $rememberMe: Boolean) {
@@ -19,6 +20,8 @@ const LOGIN = gql`
 `
 
 function LogInForm() {
+    const {currentUser, refreshUser} = useContext(UserContext)
+    console.log(currentUser)
     const [login, loginResult] = useMutation(LOGIN)
 
     let loginResultDisplay = null
@@ -27,7 +30,6 @@ function LogInForm() {
         if (loginResult.loading) {
             loginResultDisplay = <Spinner animation={"border"} variant="primary"/>
         } else {
-            console.log(loginResult.data)
             if (loginResult.data.login.ok) {
                 // do something
             } else {
@@ -35,8 +37,6 @@ function LogInForm() {
             }
         }
     }
-
-    console.log(loginResultDisplay)
 
     return (
         <Formik
@@ -60,6 +60,8 @@ function LogInForm() {
                         }
                     }
                 )
+                let result = refreshUser()
+                console.log(result)
                 setSubmitting(false)
             }}
         >
@@ -101,7 +103,7 @@ function LogInForm() {
                         >
                             Log In
                         </Button>
-                        <div style={{"padding-left": "10px"}}>
+                        <div style={{paddingLeft: "10px"}}>
                             {loginResultDisplay}
                         </div>
                     </div>
