@@ -24,6 +24,7 @@ const GET_ME = gql`
     }
 `
 
+// TODO: There is a race condition here when a child calls `refreshUser`
 function UserContextProvider(props) {
     const meQuery = useQuery(GET_ME)
     console.log("meQuery", meQuery)

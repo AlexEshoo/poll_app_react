@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import {Formik, Form, Field, ErrorMessage, useFormikContext} from "formik";
+import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from 'yup'
 import FormControl from 'react-bootstrap/FormControl'
 import FormCheck from 'react-bootstrap/FormCheck'
@@ -20,8 +20,7 @@ const LOGIN = gql`
 `
 
 function LogInForm() {
-    const {currentUser, refreshUser} = useContext(UserContext)
-    console.log(currentUser)
+    const {refreshUser} = useContext(UserContext)
     const [login, loginResult] = useMutation(LOGIN)
 
     let loginResultDisplay = null
@@ -31,7 +30,7 @@ function LogInForm() {
             loginResultDisplay = <Spinner animation={"border"} variant="primary"/>
         } else {
             if (loginResult.data.login.ok) {
-                // do something
+                refreshUser()  // Call this **AFTER** the mutation completes to avoid race condition
             } else {
                 loginResultDisplay = <div>{loginResult.data.login.failReason}</div>
             }
@@ -60,8 +59,6 @@ function LogInForm() {
                         }
                     }
                 )
-                let result = refreshUser()
-                console.log(result)
                 setSubmitting(false)
             }}
         >
