@@ -3,7 +3,6 @@ import Button from "react-bootstrap/Button";
 import gql from 'graphql-tag'
 import {useMutation} from "@apollo/react-hooks";
 import {UserContext} from "./UserContext";
-import Spinner from "react-bootstrap/Spinner";
 
 const LOGOUT = gql`
     mutation {

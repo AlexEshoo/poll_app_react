@@ -4,42 +4,12 @@ import {Link} from "react-router-dom";
 import NavbarCollapse from "react-bootstrap/NavbarCollapse";
 import {NavItem} from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
-import Button from "react-bootstrap/Button";
-import LogInForm from "./LogInForm";
 import {UserContext} from "./UserContext";
 import LogoutButton from "./LogoutButton";
+import LoginRegisterPopoverButton from "./LoginRegisterPopoverButton";
 
 function AppNavbar() {
-    const userContext = useContext(UserContext)
-
-    let loginControl
-    if (userContext.currentUser) {
-        loginControl = (
-            <div>
-                Logged in as {userContext.currentUser.username}
-                <LogoutButton/>
-            </div>
-        )
-    } else {
-        loginControl = (
-            <OverlayTrigger
-                trigger="click"
-                placement="bottom"
-                overlay={
-                    <Popover id="login-popover">
-                        <Popover.Content>
-                            <LogInForm/>
-                        </Popover.Content>
-                    </Popover>
-                }>
-                <Button>
-                    LOGIN
-                </Button>
-            </OverlayTrigger>
-        )
-    }
+    const {currentUser} = useContext(UserContext)
 
     return (
         <Navbar className="poll-nav">
@@ -52,7 +22,7 @@ function AppNavbar() {
                         New Poll
                     </NavItem>
                 </Nav>
-                {loginControl}
+                {currentUser ? <div>{currentUser.username} <LogoutButton/></div> : <LoginRegisterPopoverButton/>}
             </NavbarCollapse>
         </Navbar>
     )
