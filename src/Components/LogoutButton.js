@@ -18,12 +18,8 @@ function LogoutButton() {
     const {refreshUser} = useContext(UserContext)
 
     if (logoutResult.called) {
-        if (logoutResult.loading) {
-        } else {
-            if (logoutResult.data.logout.ok) {
-                refreshUser()  // Call this **AFTER** the mutation completes to avoid race condition
-            } else {
-            }
+        if (!logoutResult.loading && logoutResult.data.logout.ok) {
+            refreshUser()  // Call this **AFTER** the mutation completes to avoid race condition
         }
     }
 
