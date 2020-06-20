@@ -10,6 +10,7 @@ function LoginRegisterPopoverButton() {
         <OverlayTrigger
             trigger="click"
             placement="bottom"
+            rootClose={true}
             overlay={
                 <Popover id="login-popover">
                     <Popover.Content>

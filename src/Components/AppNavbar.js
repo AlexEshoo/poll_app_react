@@ -22,7 +22,7 @@ function AppNavbar() {
                         New Poll
                     </NavItem>
                 </Nav>
-                {currentUser ? <div>{currentUser.username} <LogoutButton/></div> : <LoginRegisterPopoverButton/>}
+                {currentUser ? <div>Logged in as {currentUser.username} <LogoutButton/></div> : <LoginRegisterPopoverButton/>}
             </NavbarCollapse>
         </Navbar>
     )
