@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import gql from 'graphql-tag';
 import {useQuery} from "@apollo/react-hooks";
 
@@ -24,7 +24,6 @@ const GET_ME = gql`
     }
 `
 
-// TODO: There is a race condition here when a child calls `refreshUser`
 function UserContextProvider(props) {
     const meQuery = useQuery(GET_ME)
     console.log("meQuery", meQuery)
